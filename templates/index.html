@@ -6,8 +6,9 @@
     <title>WebImageProcessor</title>
 </head>
 <body>
-    <form action="upload" method="POST">
-        <input type="file" required accept="image/*">
+    <form action="upload" method="POST" enctype="multipart/form-data">
+        <input type="file" required accept="image/*" name="file">
+        <button type="submit">ファイルをアップロード</button>
     </form>
 
     <a href="templates/filelist.html?mode=gray">グレースケール</a>
