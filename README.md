@@ -51,5 +51,5 @@ EveSquare
 LongMine
 
 # ライブラリのバージョン
-watchdog=0.10.4
-opencv-python=4.4.0.44
+- watchdog=0.10.4
+- opencv-python=4.4.0.44
