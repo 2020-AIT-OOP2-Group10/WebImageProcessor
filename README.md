@@ -51,3 +51,4 @@ EveSquare
 LongMine
 
 # ライブラリのバージョン
+0.10.4
