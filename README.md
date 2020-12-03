@@ -20,3 +20,32 @@ OOP2第11回による演習用プロジェクト
         ├ image_process.py
         ├ README.md
         └ web.py
+
+# 担当者
+Web分野
+
+- Flaskによるルーティング
+- 画像のアップロードおよび保存
+- 画像一覧ページ
+
+## 画像アップロードページ
+
+k19051
+
+## 画像一覧ページ
+
+KawaiKohsuke
+
+画像処理分野
+
+- WatchDogによるディレクトリの監視
+- 画像処理
+- 処理した画像を保存
+
+## Cannyフィルタリング&WatchDog
+
+EveSquare
+
+## グレースケール
+
+LongMine
