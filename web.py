@@ -4,6 +4,8 @@ from flask import Flask, request, redirect, url_for,render_template
 from werkzeug.utils import secure_filename
 # 画像のダウンロード
 from flask import send_from_directory
+# フォルダ内のファイル一覧を取得するglobモジュール
+import glob
 
 # アップロードされる拡張子の制限
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'gif'])
@@ -45,6 +47,7 @@ def upload():
 # http://127.0.0.1:5000/upload_list
 @app.route("/upload_list")
 def upload_list():
+    files = glob.glob("./upload_images/*")
 
     return render_template("filelist.html")
 
@@ -52,6 +55,7 @@ def upload_list():
 # http://127.0.0.1:5000/gray_list
 @app.route("/gray_list")
 def gray_list():
+    files = glob.glob("./output_gray_images/*")
 
     return render_template("filelist.html")
 
@@ -59,6 +63,7 @@ def gray_list():
 # http://127.0.0.1:5000/canny_list
 @app.route("/canny_list")
 def canny_list():
+    files = glob.glob("./output_canny_images/*")
 
     return render_template("filelist.html")
 
@@ -66,6 +71,7 @@ def canny_list():
 # http://127.0.0.1:5000/frame_list
 @app.route("/frame_list")
 def frame_list():
+    files = glob.glob("./output_frame_images/*")
 
     return render_template("filelist.html")
 
@@ -73,6 +79,7 @@ def frame_list():
 # http://127.0.0.1:5000/mosaic_list
 @app.route("/mosaic_list")
 def mosaic_list():
+    files = glob.glob("./output_mosaic_images/*")
 
     return render_template("filelist.html")
 
