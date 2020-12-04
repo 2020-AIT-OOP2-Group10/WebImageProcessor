@@ -10,26 +10,31 @@ from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
 #グレースケール
-def gray():
-    # 画像処理&ファイルの保存
+def gray(filename):
+    #filename は　upload_imagesに入るファイルの名前(文字列型)　例えば sample.jpg　など
+    # TODO cv2でグレースケールにする
+    #ファイル読み込み　コメントを外して利用して
+    #im=cv2.imread("./upload_images/" + filename)
+    #ファイルの書き出し　コメントを外して利用して
+    #cv2.imwrite("./output_gray_images/" + filename, グレーにした画像を入れた変数名)
     pass
 
 #Cannyフィルタ
-def canny(path):
-    im=cv2.imread(path)
+def canny(filename):
+    im=cv2.imread("./upload_images/" + filename)
     gray=cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
     gray=cv2.Canny(gray,100,200)
     #書き出し
-    cv2.imwrite(path, gray)
+    cv2.imwrite("./output_canny_images/" + filename, gray)
 
 #顔を検出して枠で囲う
-def face_detection(path):
+def face_detection(filename):
 
     #顔検出のライブラリ読み込み
     face_cascade_path = 'haarcascade_frontalface_default.xml'
     face_cascade = cv2.CascadeClassifier(face_cascade_path)
     #処理するファイルを読み込む
-    src = cv2.imread(path)
+    src = cv2.imread("./upload_images/" + filename)
     src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(src_gray)
     #顔検出範囲を表示
@@ -38,25 +43,56 @@ def face_detection(path):
         face = src[y: y + h, x: x + w]
         face_gray = src_gray[y: y + h, x: x + w]
     #書き出し
-    cv2.imwrite(path, src)
+    cv2.imwrite("./output_frame_images/" + filename, src)
 
 #モザイク
-def mosaic():
-    pass
+def mosaic(filename):
+
+    face_cascade_path = 'haarcascade_frontalface_default.xml'
+
+    face_cascade = cv2.CascadeClassifier(face_cascade_path)
+
+    src = cv2.imread("./upload_images/" + filename)
+    src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+
+    faces = face_cascade.detectMultiScale(src_gray)
+
+    ratio = 0.05
+
+    for x, y, w, h in faces:
+        small = cv2.resize(src[y: y + h, x: x + w], None, fx=ratio, fy=ratio, interpolation=cv2.INTER_NEAREST)
+        src[y: y + h, x: x + w] = cv2.resize(small, (w, h), interpolation=cv2.INTER_NEAREST)
+    
+    cv2.imwrite("./output_mosaic_images/" + filename, src)
 
 class ChangeHandler(FileSystemEventHandler):
  
-    #ファイルやフォルダが作成された場合
+    #ファイル・フォルダ作成
     def on_created(self, event):
         filepath = event.src_path
         filename = os.path.basename(filepath)
+        #確認の為（デバッグ用）
         print('%sを作成しました。' % filename)
+
+        #ファイルを反映するのに時間かかるのでsleep１をして遅らせて処理する(無理やり)
+        time.sleep(1)
+        #グレースケールの関数呼び出し
+        gray(filename)
+        #cannyの関数呼び出し
+        canny(filename)
+        #face_detectionの関数呼び出し
+        face_detection(filename)
+        #mosaicの関数呼び出し
+        mosaic(filename)
+        
+        #デバッグ用
+        # print("filename:", filename)
+        # print("filepath:", filepath)
+
  
-    #ファイルやフォルダが更新された場合
+    #ファイル・フォルダ更新
     def on_modified(self, event):
-        filepath = event.src_path
-        filename = os.path.basename(filepath)
-        print('%sを変更しました。' % filename)
+        pass
  
     #ファイル・フォルダが移動
     def on_moved(self, event):
@@ -65,7 +101,6 @@ class ChangeHandler(FileSystemEventHandler):
     #ファイル・フォルダ削除
     def on_deleted(self, event):
         pass
-
 
 if __name__ == "__main__":
     # WatchDogで監視
