@@ -42,6 +42,41 @@ def upload():
         return render_template('index.html')
 
 
+# http://127.0.0.1:5000/upload_list
+@app.route("/upload_list")
+def upload_list():
+
+    return render_template("filelist.html")
+
+
+# http://127.0.0.1:5000/gray_list
+@app.route("/gray_list")
+def gray_list():
+
+    return render_template("filelist.html")
+
+
+# http://127.0.0.1:5000/canny_list
+@app.route("/canny_list")
+def canny_list():
+
+    return render_template("filelist.html")
+
+
+# http://127.0.0.1:5000/frame_list
+@app.route("/frame_list")
+def frame_list():
+
+    return render_template("filelist.html")
+
+
+# http://127.0.0.1:5000/mosaic_list
+@app.route("/mosaic_list")
+def mosaic_list():
+
+    return render_template("filelist.html")
+
+
 # http://127.0.0.1:5000/
 @app.route('/')
 def index():
