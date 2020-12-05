@@ -47,9 +47,11 @@ def upload():
 # http://127.0.0.1:5000/upload_list
 @app.route("/upload_list")
 def upload_list():
+    # フォルダ内のファイルの一覧を取得
     files = glob.glob("./upload_images/*")
 
-    return render_template("filelist.html")
+    # ファイル一覧をJavaScriptに送る
+    return render_template("filelist.html", files=files)
 
 
 # http://127.0.0.1:5000/gray_list
@@ -57,7 +59,7 @@ def upload_list():
 def gray_list():
     files = glob.glob("./output_gray_images/*")
 
-    return render_template("filelist.html")
+    return render_template("filelist.html", files=files)
 
 
 # http://127.0.0.1:5000/canny_list
@@ -65,7 +67,7 @@ def gray_list():
 def canny_list():
     files = glob.glob("./output_canny_images/*")
 
-    return render_template("filelist.html")
+    return render_template("filelist.html", files=files)
 
 
 # http://127.0.0.1:5000/frame_list
@@ -73,7 +75,7 @@ def canny_list():
 def frame_list():
     files = glob.glob("./output_frame_images/*")
 
-    return render_template("filelist.html")
+    return render_template("filelist.html", files=files)
 
 
 # http://127.0.0.1:5000/mosaic_list
@@ -81,7 +83,7 @@ def frame_list():
 def mosaic_list():
     files = glob.glob("./output_mosaic_images/*")
 
-    return render_template("filelist.html")
+    return render_template("filelist.html", files=files)
 
 
 # http://127.0.0.1:5000/
