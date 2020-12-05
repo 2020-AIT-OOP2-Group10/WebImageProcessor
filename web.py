@@ -86,6 +86,11 @@ def mosaic_list():
     return render_template("filelist.html", files=files)
 
 
+# http://127.0.0.1:5000/img/<path:dir_path>/<path:file_path>
+@app.route("/img/<path:dir_path>/<path:file_path>")
+def get_img_file(dir_path, file_path):
+    return send_from_directory(dir_path, file_path)
+
 # http://127.0.0.1:5000/
 @app.route('/')
 def index():

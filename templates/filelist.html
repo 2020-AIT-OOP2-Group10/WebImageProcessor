@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="{{ url_for('static', filename='filelist.js') }}"></script>
     <script defer>
-        const files_length = "{{ files|length }}";
-        const files = "{{ files|safe }}";
+        const files = {{ files|tojson }};
+        const files_length = {{ files|length }};
+
+        for (let i=0; i<files_length; i++) {
+            console.log(files[i]);
+        }
+
     </script>
     <title>ImageList</title>
 </head>
 <body>
+    <p><img src="/img/output_canny_images/Baboon.jpg" alt="ああ"></p>
     
 </body>
 </html>
