@@ -88,11 +88,45 @@ class ChangeHandler(FileSystemEventHandler):
         #デバッグ用
         # print("filename:", filename)
         # print("filepath:", filepath)
+        # print("./upload_images/" + filename)
 
  
     #ファイル・フォルダ更新
     def on_modified(self, event):
-        pass
+        filepath = event.src_path
+        filename = os.path.basename(filepath)
+
+        #画像置くと生成されるやつは無視して関数を閉じる
+        if ".DS_Store" == filename:
+            return
+        
+        #upload_imagesの中身が空になったときの処理
+        if "upload_images" == filename:
+            print(f"{filename}の中身が空になりました。")
+            return
+        
+        #確認の為（デバッグ用）
+        print('%sを更新しました。' % filename)
+        
+        #ファイルを反映するのに時間かかるのでsleep１をして遅らせて処理する(無理やり)
+        time.sleep(1)
+
+        #もしエラーが出たときの対応
+        try:
+            #ファイルの安否確認(更新のときはファイルが消えても作動してしまうため)
+            if os.path.exists("./upload_images/" + filename):
+                #グレースケールの関数呼び出し
+                gray(filename)
+                #cannyの関数呼び出し
+                canny(filename)
+                #face_detectionの関数呼び出し
+                face_detection(filename)
+                #mosaicの関数呼び出し
+                mosaic(filename)
+            else:
+                print('ファイルが存在しませんでした。')
+        except:
+            print('正常に動作しませんでした。')
  
     #ファイル・フォルダが移動
     def on_moved(self, event):
