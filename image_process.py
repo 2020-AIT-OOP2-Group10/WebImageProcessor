@@ -12,12 +12,12 @@ from watchdog.observers import Observer
 #グレースケール
 def gray(filename):
     #filename は　upload_imagesに入るファイルの名前(文字列型)　例えば sample.jpg　など
-    # TODO cv2でグレースケールにする
     #ファイル読み込み　コメントを外して利用して
-    #im=cv2.imread("./upload_images/" + filename)
+    im=cv2.imread("./upload_images/" + filename)
+    #グレースケール化
+    Gray1=cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
     #ファイルの書き出し　コメントを外して利用して
-    #cv2.imwrite("./output_gray_images/" + filename, グレーにした画像を入れた変数名)
-    pass
+    cv2.imwrite("./output_gray_images/" + filename, Gray1)
 
 #Cannyフィルタ
 def canny(filename):
