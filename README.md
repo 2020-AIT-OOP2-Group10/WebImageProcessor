@@ -12,6 +12,7 @@ OOP2第11回による演習用プロジェクト
         ├ output_mosaic_images/
         |   └ (Mosaicized images)
         ├ static/
+        |   └ filelist.js
         ├ templates/
         |   ├ filelist.html
         |   └ index.html

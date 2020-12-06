@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="{{ url_for('static', filename='filelist.js') }}"></script>
-    <title>ImageList</title>
+    <script defer>
+        // pythonから受け取ったファイルの一覧
+        const files = {{ files|tojson }};
+    </script>
+    <title>{{ title }}</title>
 </head>
 <body>
-    
+    <div id="img_list"></div>
 </body>
 </html>
