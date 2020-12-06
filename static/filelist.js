@@ -1,7 +1,21 @@
-/*---画像を一覧表示する処理---*/
-// 1.GETパラメータを取得
+if (files.length > 0) {
 
+    // <p>の親要素<div>
+    const div = document.getElementById("img_list");
 
-// 2.画像をパラメータに基づいたディレクトリから取得
+    for (let i=0; i<files.length; i++) {
+        
+        // <img>の親要素<p>
+        let p = document.createElement("p");
+        div.appendChild(p);
 
-// 3.htmlに追加
+        // <img>
+        let img = document.createElement("img");
+        img.src = files[i];
+        img.alt = files[i];
+
+        p.appendChild(img);
+
+    }
+
+}

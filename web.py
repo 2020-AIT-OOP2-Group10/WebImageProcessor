@@ -50,12 +50,16 @@ def upload_list():
     # フォルダ内のファイルの一覧を取得
     files = glob.glob("./upload_images/*")
 
-    # ファイル一覧を回して、ファイルパスに"img"を結合
+    # ファイル一覧を回して、ファイル名を取り出し、"img/upload_images"を結合
     for index, file in enumerate(files):
-        files[index] = os.path.join("img", file)
+        # ファイル名
+        basename = os.path.basename(file)
+        # ファイル直上のフォルダ名
+        subdirname = os.path.basename(os.path.dirname(file))
+        files[index] = os.path.join("img", subdirname, basename)
 
     # ファイル一覧をJavaScriptに送る
-    return render_template("filelist.html", files=files)
+    return render_template("filelist.html", files=files, title="upload_images")
 
 
 # http://127.0.0.1:5000/gray_list
@@ -63,7 +67,12 @@ def upload_list():
 def gray_list():
     files = glob.glob("./output_gray_images/*")
 
-    return render_template("filelist.html", files=files)
+    for index, file in enumerate(files):
+        basename = os.path.basename(file)
+        subdirname = os.path.basename(os.path.dirname(file))
+        files[index] = os.path.join("img", subdirname, basename)
+
+    return render_template("filelist.html", files=files, title="output_gray_images")
 
 
 # http://127.0.0.1:5000/canny_list
@@ -71,7 +80,12 @@ def gray_list():
 def canny_list():
     files = glob.glob("./output_canny_images/*")
 
-    return render_template("filelist.html", files=files)
+    for index, file in enumerate(files):
+        basename = os.path.basename(file)
+        subdirname = os.path.basename(os.path.dirname(file))
+        files[index] = os.path.join("img", subdirname, basename)
+
+    return render_template("filelist.html", files=files, title="output_canny_images")
 
 
 # http://127.0.0.1:5000/frame_list
@@ -79,7 +93,12 @@ def canny_list():
 def frame_list():
     files = glob.glob("./output_frame_images/*")
 
-    return render_template("filelist.html", files=files)
+    for index, file in enumerate(files):
+        basename = os.path.basename(file)
+        subdirname = os.path.basename(os.path.dirname(file))
+        files[index] = os.path.join("img", subdirname, basename)
+
+    return render_template("filelist.html", files=files, title="output_frame_images")
 
 
 # http://127.0.0.1:5000/mosaic_list
@@ -87,7 +106,12 @@ def frame_list():
 def mosaic_list():
     files = glob.glob("./output_mosaic_images/*")
 
-    return render_template("filelist.html", files=files)
+    for index, file in enumerate(files):
+        basename = os.path.basename(file)
+        subdirname = os.path.basename(os.path.dirname(file))
+        files[index] = os.path.join("img", subdirname, basename)
+
+    return render_template("filelist.html", files=files, title="output_mosaic_images")
 
 
 # http://127.0.0.1:5000/img/<path:dir_path>/<path:file_path>
