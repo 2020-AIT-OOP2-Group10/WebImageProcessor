@@ -50,6 +50,10 @@ def upload_list():
     # フォルダ内のファイルの一覧を取得
     files = glob.glob("./upload_images/*")
 
+    # ファイル一覧を回して、ファイルパスに"img"を結合
+    for index, file in enumerate(files):
+        files[index] = os.path.join("img", file)
+
     # ファイル一覧をJavaScriptに送る
     return render_template("filelist.html", files=files)
 

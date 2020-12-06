@@ -8,15 +8,23 @@
         const files = {{ files|tojson }};
         const files_length = {{ files|length }};
 
+        // 画像を追加する<div>
+        const div_img_list = document.getElementById("img_list");
+
         for (let i=0; i<files_length; i++) {
-            console.log(files[i]);
+            let img = document.createElement("img");
+            img.src = files[i];
+            img.alt = files[i];
+
+            div_img_list.appendChild(img);
         }
+
+        
 
     </script>
     <title>ImageList</title>
 </head>
 <body>
-    <p><img src="/img/output_canny_images/Baboon.jpg" alt="ああ"></p>
-    
+    <div id="img_list"></div>
 </body>
 </html>
