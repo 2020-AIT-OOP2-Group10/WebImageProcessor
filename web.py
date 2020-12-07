@@ -20,6 +20,7 @@ def allwed_file(filename):
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False  # 日本語などのASCII以外の文字列を返したい場合は、こちらを設定しておく
 
+
 # http://127.0.0.1:5000/upload
 @app.route('/upload',methods = ['POST'])
 def upload():
@@ -27,13 +28,15 @@ def upload():
     # ファイルがなかった場合の処理
     if 'file' not in request.files:
         print('ファイルがありません')
-        return render_template('index.html')
+        result = 'ファイルがありません'
+        return render_template('index.html',result=result)
     # データの取り出し
     file = request.files['file']
     # ファイル名がなかった時の処理
     if file.filename == '':
         print('ファイルがありません')
-        return render_template('index.html')
+        result = 'ファイルがありません'
+        return render_template('index.html',result=result)
     # ファイルのチェック
     if file and allwed_file(file.filename):
         # 危険な文字を削除（サニタイズ処理）
@@ -41,8 +44,14 @@ def upload():
         # ファイルの保存
         file.save(os.path.join('./upload_images', filename))
         # アップロード後のページに転送
-        return render_template('index.html')
+        result = "ファイルのアップロードが完了しました。"
+        return render_template('index.html',result=result)
 
+# http://127.0.0.1:5000/upload(メソッドなし)
+@app.route('/upload')
+# 上のナビゲーションバーからのアクセス
+def upload1():
+    return render_template('index.html')
 
 # http://127.0.0.1:5000/upload_list
 @app.route("/upload_list")

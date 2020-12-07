@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script defer src="{{ url_for('static', filename='filelist.js') }}"></script>
     <script defer>
         // pythonから受け取ったファイルの一覧
@@ -11,6 +12,36 @@
     <title>{{ title }}</title>
 </head>
 <body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/upload"></a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/upload">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/upload_list">upload</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/gray_list">gray</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/canny_list">canny</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/frame_list">frame</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/mosaic_list">mosaic</a>ç
+                </li>
+            </ul>
+        </div>
+    </nav> 
+     
+
     <div id="img_list"></div>
 </body>
 </html>
